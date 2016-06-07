@@ -6,9 +6,11 @@
 body {
     background: black;
 }
+* {
+    font-family: DejaVuSansMono;
+}
 h1 {
     color: white;
-    font-family: DejaVuSansMono;
     font-size: 11px;
 }
 .master {
@@ -17,19 +19,31 @@ h1 {
 }
 .post-title {
     color: white;
-    font-family: DevaVuSansMono;
     font-size: 14px;
 }
 .post-body {
     color: white;
-    font-family: DevaVuSansMono;
     font-size: 11px;
 }
 .post-footer {
     color: gray;
-    font-family: DevaVuSansMono;
     font-size: 11px;
 }
 a {
     color: #00AA00;
+    text-decoration: none;
 }
+a:hover {
+    text-decoration: underline;
+}
+li {
+    color: white;
+    font-size: 11px;
+}
+ul {
+    color: white;
+}
+h3 {
+    font-size: 15px;
+}
+
