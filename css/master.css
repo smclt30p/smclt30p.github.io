@@ -1,0 +1,32 @@
+@font-face {
+    font-family: DejaVuSansMono;
+    src: url("../font/DejaVuSansMono.ttf");
+}
+
+body {
+    background: black;
+}
+h1 {
+    color: white;
+    font-family: DejaVuSansMono;
+    font-size: 11px;
+}
+.master {
+    width: 1000px;
+    margin: 20px auto;
+}
+.post-title {
+    color: white;
+    font-family: DevaVuSansMono;
+    font-size: 14px;
+}
+.post-body {
+    color: white;
+    font-family: DevaVuSansMono;
+    font-size: 11px;
+}
+.post-footer {
+    color: gray;
+    font-family: DevaVuSansMono;
+    font-size: 11px;
+}
