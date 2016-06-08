@@ -30,7 +30,7 @@ which every StackTraceElement occured. Now just loop though the elements ...
 ...
 
 } catch (FileNotFoundException e) {
-	String trace  = e.toString();
+	String trace  = e.toString() + "\n";
 	for (StackTraceElement el : e.getStackTrace()) {
 		trace += "\t at " + e1.toString() + "\n";
 	}
