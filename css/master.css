@@ -47,4 +47,9 @@ ul {
 h3 {
     font-size: 15px;
 }
-
+.code {
+    background:  gray;
+    color: white;
+    font-size: 11px;
+    padding: 5px;
+}
