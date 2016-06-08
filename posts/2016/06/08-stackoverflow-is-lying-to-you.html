@@ -22,7 +22,7 @@ StringWriter sw = new StringWriter();
 PrintWriter pw = new PrintWriter(sw);
 e.printStackTrace(pw);
 sw.toString(); // stack trace as a string
-</pre>I asked my friend Miso to try and make something more efficient, and he failed miserably (didn't even try). So, determined to fix this, 
+</pre>I asked my friend Mishke to try and make something more efficient, and he failed miserably (didn't even try). So, determined to fix this, 
 I started digging through the Throwable javadoc and found an interesting method called getStackTrace() which returns an array of 
 StackTraceElements, and I tried calling toString() on each element individually, and guess what? toString() returns the location at 
 which every StackTraceElement occured. Now just loop though the elements ...
