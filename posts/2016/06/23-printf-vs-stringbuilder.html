@@ -4,6 +4,8 @@
 	<link href="../../../css/master.css" rel="stylesheet" type="text/css">
 	<link rel="shortcut icon" type="image/x-icon" href="img/tux.png" />`
 	<title>Console Output - printf vs StringBuilder - Gala's EOF</title>
+	<link href="../../../prism/prism.css" rel="stylesheet" type="text/css">
+	<script src="../../../prism/prism.js"></script>
 </head>
 <body>
 <div class="master">
@@ -21,8 +23,7 @@ and that calling a JNI function could be faster and let <b>libc</b> handle the r
 So, lets make some tests. First I tried <b>StringBuilder</b> and here are the results and the code, I did 10 samples:
 
 Code:
-<pre class="code">
-public class PerfTest {
+<pre class="code"><code class="language-java">public class PerfTest {
     public static void main(String[] args) {
 
         String tag = "12345678";
@@ -43,7 +44,7 @@ public class PerfTest {
 
     }
 }
-</pre>The results:
+</code></pre>The results:
 <pre class="code">
 * PerfTest_jar time java -jar PerfTest.jar
 [12345678] (ERROR) blog_test: Test for blog
@@ -77,8 +78,7 @@ java -jar PerfTest.jar  0,09s user 0,02s system 95% cpu 0,115 total
 java -jar PerfTest.jar  0,10s user 0,01s system 100% cpu 0,106 total
 </pre>We will take a look at the <b>total</b> time here. Over 10 samples it took <b>StrinbBuilder</b> to do the work an average of 0.112,4 seconds. That is with 
 JVM init time. Now, let's try with <b>System.out.printf(String format, Object...items);</b>. Here's the code:
-<pre class="code">
-public class PerfTest {
+<pre class="code"><code class="language-java">public class PerfTest {
     public static void main(String[] args) {
         String tag = "12345678";
         String tagSeverity = "ERROR";
@@ -88,7 +88,7 @@ public class PerfTest {
         System.out.printf("[%s] (%s) %s: %s\n", tag, tagSeverity, logTag, message);
     }
 }
-</pre>And here are the results:
+</code></pre>And here are the results:
 <pre class="code">
 * PerfTest_jar time java -jar PerfTest.jar
 [12345678] (ERROR) blog_test: Test for blog
@@ -123,13 +123,12 @@ java -jar PerfTest.jar  0,10s user 0,01s system 99% cpu 0,113 total
 <b>StringBuilder</b> which is significant for a computer program.
 This makes sense. The actual formatting does a class called <b>Formatter</b> so lets take a look at OpenJDK's implementation of that class. 
 Lets follow <b>printf()</b>.
-<pre class="code">
-public PrintStream printf(String format, Object ... args) {
+<pre class="code"><code class="language-java">public PrintStream printf(String format, Object ... args) {
         return format(format, args);
 }
+</code>
 </pre>Following further...
-<pre class="code">
-public PrintStream format(String format, Object ... args) {
+<pre class="code"><code class="language-java">public PrintStream format(String format, Object ... args) {
         try {
             synchronized (this) {
                 ensureOpen();
@@ -145,11 +144,10 @@ public PrintStream format(String format, Object ... args) {
         }
         return this;
 }
-</pre>This method aquires the thread lock onto something and does a litle housekeeping with <b>ensureOpen();</b> before calling 
+</code></pre>This method aquires the thread lock onto something and does a litle housekeeping with <b>ensureOpen();</b> before calling 
 <b>formatter.format(Locale.getDefault(), format, args);</b> Here we see the actual usage of the <b>formatter</b> field, which is an instance of <b>Formatter</b>. 
 Lets follow <b>formatter.format(Locale.getDefault, format, args);</b>...
-<pre class="code">
-public Formatter format(Locale l, String format, Object ... args) {
+<pre class="code"><code class="language-java">public Formatter format(Locale l, String format, Object ... args) {
         ensureOpen();
 
         // index of last argument referenced
@@ -191,10 +189,10 @@ public Formatter format(Locale l, String format, Object ... args) {
         }
         return this;
 }
+</code>
 </pre>Here, the most interesting statement is <b>FormatString[] fs = parse(format);</b> which returns an array of <b>FormatString</b> objects, which replace the wildcards
 with actual values. How does it do that? Regular expressions. Lets trace <b>parse(format);</b>.
-<pre class="code">
-    private static final String formatSpecifier
+<pre class="code"><code class="language-java">private static final String formatSpecifier
         = &quot;%(\\d+\\$)?([-#+ 0,(\\&lt;]*)?(\\d+)?(\\.\\d+)?([tT])?([a-zA-Z%])&quot;;
 
     private static Pattern fsPattern = Pattern.compile(formatSpecifier);
@@ -226,20 +224,18 @@ with actual values. How does it do that? Regular expressions. Lets trace <b>pars
             }
         }
         return al.toArray(new FormatString[al.size()]);
-}
+}</code>
 </pre>Here we can see the <b>Pattern</b> being compiled and the matcher being run against the <b>format</b> string which we specified in 
 <b>System.out.printf(String format, Object...items);</b>. Compiling a pattern and running a regex search is not fast and very expensive, 
 that is why it takes cca. 3ms longer for printf to do the work. Now, lets return to the previous code snippet and take a look at 
 <b>fs.print((args == null ? null : args[last]), l);</b> ...
-<pre class="code">
-private interface FormatString {
+<pre class="code"><code class="language-java">private interface FormatString {
         int index();
         void print(Object arg, Locale l) throws IOException;
         String toString();
-}
+}</code>
 </pre>Which leads us to an interface. Lets look up the method implementation inside <b>FormatSpecifier</b>:
-<pre class="code">
-public void print(Object arg, Locale l) throws IOException {
+<pre class="code"><code class="language-java">public void print(Object arg, Locale l) throws IOException {
             if (dt) {
                 printDateTime(arg, l);
                 return;
@@ -279,10 +275,10 @@ public void print(Object arg, Locale l) throws IOException {
                 assert false;
             }
         }
+</code>
 </pre>Here is the <b>printf()</b> table beign used to run the format tokens like <b>%s</b> against a list of predefined values. Here is the 
 definiton of those values in the nested <b>Conversion</b> class which is inside <b>Formatter</b>:
-<pre class="code">
-static final char DECIMAL_INTEGER     = 'd';
+<pre class="code"><code class="language-java">static final char DECIMAL_INTEGER     = 'd';
 static final char OCTAL_INTEGER       = 'o';
 static final char HEXADECIMAL_INTEGER = 'x';
 static final char HEXADECIMAL_INTEGER_UPPER = 'X';
@@ -305,9 +301,9 @@ static final char HASHCODE            = 'h';
 static final char HASHCODE_UPPER      = 'H';
 static final char LINE_SEPARATOR      = 'n';
 static final char PERCENT_SIGN        = '%';
+</code>
 </pre>After determining the format token, it calls specific methods, such as <b>printInteger(arg, l);</b>. Lets follow thats, it's also inside <b>FormatSpecifier</b>.
-<pre class="code">
-private void printInteger(Object arg, Locale l) throws IOException {
+<pre class="code"><code class="language-java">private void printInteger(Object arg, Locale l) throws IOException {
             if (arg == null)
                 print("null");
             else if (arg instanceof Byte)
@@ -323,10 +319,10 @@ private void printInteger(Object arg, Locale l) throws IOException {
             else
                 failConversion(c, arg);
         }
+</code>
 </pre>The <b>printInteger( ... );</b> method calls <b>print( ... )</b> inside <b>FormatSpecifier</b>, so lets take a look at that. There is various <b>print()</b> methods in
 <b>FormatSpecifier</b>, overloading each other. Let's take a look at one:
-<pre class="code">
-private void print(long value, Locale l) throws IOException {
+<pre class="code"><code class="language-java">private void print(long value, Locale l) throws IOException {
 
             StringBuilder sb = new StringBuilder();
 
@@ -381,12 +377,13 @@ private void print(long value, Locale l) throws IOException {
             // justify based on width
             a.append(justify(sb.toString()));
         }
+</code>
 </pre>At the end of the method the chunk of text gets added to an <b>Appendable</b>, which is an interface, casted to a <b>PrintStream</b>,
-which eventually gets returned to our <b>System.out.printf( ... )</b>. Appending characters to the <b>a</b> <b>Appendable</b> actually prints them to the 
-console. That is done with the overloaded <b>print( ... )</b> methods inside <b>FormatSpecifier</b>, and the call <b>a.append(justify(sb.toString()));</b>
+which eventually gets returned to our <b><code class="language-java">System.out.printf( ... )</code></b>. Appending characters to the <b>a</b> <b>Appendable</b> actually prints them to the 
+console. That is done with the overloaded <b>print( ... )</b> methods inside <b>FormatSpecifier</b>, and the call <b><code class="language-java">a.append(justify(sb.toString()));</code></b>
 does exactly that.
 
-And that is how Java's <b>printf( ... );</b> works.
+And that is how Java's <b><code class="language-java">printf( ... );</code></b> works.
 
 As you can see, there is a lot of work being done for each <b>%x</b> token. That is why it is 3ms slower, and as more <b>%x</b> tokens get added to the
 <b>printf</b> it will only get slower and slower.

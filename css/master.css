@@ -44,7 +44,7 @@ h3 {
 }
 a {
     font-size: 11px;
-    color: #00AA00;
+    color: #00E3FF;
     text-decoration: none;
 }
 a:hover {
@@ -61,7 +61,8 @@ h3 {
     font-size: 15px;
 }
 .code {
-    background: #1D1D1D;
+    background: #1d1d1d;
+	border-radius: 0.3em;
     color: white;
     font-size: 11px;
     padding: 5px;
