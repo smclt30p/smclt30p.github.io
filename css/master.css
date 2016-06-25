@@ -13,9 +13,21 @@ h1 {
     color: white;
     font-size: 11px;
 }
+h2 {
+	color: white;
+}
+.head {
+	width: 1000px;
+	margin: 0 auto;
+}
 .master {
-    width: 1000px;
-    margin: 20px auto;
+    width: 1200px;
+	overflow: hidden;
+	margin: 0 auto;
+}
+.slave {
+	width: 600px;
+	float: right;
 }
 h3 {
     color: white;
