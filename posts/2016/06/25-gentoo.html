@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="../../../css/master.css" rel="stylesheet" type="text/css">
+	<title>Gentoo Linux - The best distro for fast hardware - Gala's EOF</title>
+</head>
+<body>
+<div class="master">
+
+<div class="post"> <!-- POST START -->
+<h3>Gentoo Linux - The best distro for fast hardware - 25rd June 2016</h3>			
+<pre class="post-body"> <!-- POST MAIN START -->                                                                                                   <!-- POST LIMIT -->
+Linux distros have come a long way since I started using and testing them back in 2009. Especially networking and sound. The maintainers of the Linux
+kernel really do an awesome job at reverse-engineering the drivers available on other platforms and porting the code over. 
+
+I have tried and tested every distribution there is under the sun. I've tried *buntu, Fedora, SUSE-based, RHEL-based, and, the most awesomeone, Gentoo.
+<h3>What makes Gentoo so awesome?</h3>What makes it so awesome? It's fast. Really fast. It's among the fastest Linux distributions available. What makes it fast? You can specify what you 
+want and what you need in so called <b>USE</b> flags. Every piece of sofrware has options that you can specity when you are compiling it. 
+For example, programs that need cryptography can use more than one option to compile into the program. There is GNUtls, OpenSSL and nss. Portage, 
+the Gentoo package manager, reads those flags and configures software based on your needs. Don't use systemd? Specify <b>-systemd</b> into the 
+USE flags, and every program will get compiled without any systemd support. Don't use pulseaudio? Specify <b>-pulseaudio</b> and all programs compile
+without any pulseaudio support. You get the drill. 
+Having such an optimized package manager, that only builds what you need, makes programs run faster, because they don't
+support useless features that you don't use.
+<h3>GCC Optimizations</h3>Software can run faster with more compiler optimization. The GNU C Compiler has flags called <b>-O</b> that optimize the compiled
+code to run faster. From the GNU Docs:
+<pre class="code">
+Without any optimization option, the compiler's goal is to reduce the cost of compilation and to make debugging produce the expected results. 
+Statements are independent: if you stop the program with a breakpoint between statements, you can then assign 
+a new value to any variable or change the program counter to any other statement in the function and get exactly the results 
+you expect from the source code.
+Turning on optimization flags makes the compiler attempt to improve the performance and/or code size at the expense of compilation 
+time and possibly the ability to debug the program.
+The compiler performs optimization based on the knowledge it has of the program. Compiling multiple files at once to a single 
+output file mode allows the compiler to use information gained from all of the files when compiling each of them.
+</pre>This can be seen in the real world when making software for the Raspberry Pi under embedded Linux. The GPIO pins can be used to produce a square
+signal wave. The frequency of that wave depends on the speed of the software. Here is some simple code that uses the native C library for toggling the
+signal pins on, then off:
+<pre class="code">
+INP_GPIO(4);
+OUT_GPIO(4);
+
+while(1) {
+  GPIO_SET = 1&lt;&lt;4;
+  GPIO_CLR = 1&lt;&lt;4;
+}
+</pre>Quoting from <a href="http://codeandlife.com/2012/07/03/benchmarking-raspberry-pi-gpio-speed/">this article</a> I also got the code from:
+<pre class="code">
+Without any optimizations, I got an excellent 14 MHz square wave. Adding -O3 to the compile command (gcc -O3 strobe.c -o strobe) increases the 
+rate to hefty 22 MHz.</pre>You get the idea what compiler optimization does.
+<h3>The good, the bad, and the ugly</h3>Compiling takes time. A lot of time. Infact, it takes up so much time, it is almost pointless to run Gentoo. Here is
+a table of time it took me to compile some popular programs:
+<pre class="code">
+Chromium		1.8h
+Firefox			1.5h
+LibreOffice		2.4h
+LLVM			2h
+Linux 4.6.2		45m
+NetworkManager		25m
+</pre>It is really, really slow. It's not Gentoo's fault tho, it's mine. I use a Lenovo T61 from 2008 that has an Intel Core2 Duo T8300 ticking at 2.4GHz.
+If I had a faster computer, I would run Gentoo all the time, without a doubt. But, allocating a full day or two for a system update is really not worth 
+the time, on my laptop.
+<h3>Conclusion</h3>If you have a Intel or AMD processor with 6/8 cores, or more, and are seeking the absolute maximum performance from your 
+computer, give Gentoo a shot. It will not disappoint. And if you have trouble deciding, should you use OpenRC or systemd, here is a 
+simple guideline: Are you used to seamless use permissions and fast system startup? systemd. Do you like the "old school" init system style and 
+want tighter permission management and tighter security and stability, use OpenRC.
+
+</pre> <!-- POST TEXT CLOSE -->
+<a href="../../../index.html">[ Back to index ]</a>			
+<p class="post-footer">------------------------------------------------------------------------------------------------------------------------------------------------------</p>		
+</div>	<!-- POST END -->
+</div>
+</body>
+</html>

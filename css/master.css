@@ -17,9 +17,10 @@ h1 {
     width: 1000px;
     margin: 20px auto;
 }
-.post-title {
+h3 {
     color: white;
     font-size: 14px;
+    text-decoration: none;
 }
 .post-body {
     color: white;
