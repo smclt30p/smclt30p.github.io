@@ -29,7 +29,7 @@ angular.module("postView").component("postView", {
             for (var i = 0; i < code.length; i++) {
                 self.prism.highlightElement(code[i]);
             }
-        }, 1000, false);
+        }, 2000, false);
       }
     ]
     
