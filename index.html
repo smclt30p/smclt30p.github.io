@@ -2,26 +2,30 @@
 <html ng-app="app">
 <head>
 	<link href="css/master.css" rel="stylesheet" type="text/css">
-	<title>Gala's EOF - Index</title>
+	<title>Gala's place - Index</title>
 	<link rel="shortcut icon" type="image/x-icon" href="img/tux.png" />`
 </head>
 <body>
 <div class="head">
-<h2 style="text-align: center;">Gala's End of File</h2>
-</div>
-<div class="master">
-
-    <contact-list></contact-list>
-    <post-list></post-list>
-
 </div>
     
+<div class="master" ng-view></div> <!-- Master container -->
+    
     <script src="js/angular.min.js"></script>
+    <script src="js/angular-route.min.js"></script>
+    <script src="js/angular-sanitize.min.js"></script>
+    
+    <script src="js/showdown.min.js"></script>
     <script src="app/app.js"></script>
     <script src="app/post-list/post-list.module.js"></script>
     <script src="app/post-list/post-list.component.js"></script>
     <script src="app/contact-list/contact-list.module.js"></script>
     <script src="app/contact-list/contact-list.component.js"></script>
+    <script src="app/home-page/home-page.module.js"></script>
+    <script src="app/home-page/home-page.component.js"></script>
+    <script src="app/post-view/post-view.module.js"></script>
+    <script src="app/post-view/post-view.component.js"></script>
+    <script src="app/app.config.js"></script>
     
 </body>
 </html>

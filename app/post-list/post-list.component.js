@@ -14,6 +14,7 @@ angular.module("postList").component("postList",{
         {value:7, suffix:"th"},
         {value:8, suffix:"th"},
         {value:9, suffix:"th"},
+        {value:0, suffix:"th"}
     ]
         
     this.formatOut = function(title, day, month) {
