@@ -2,8 +2,8 @@ angular.module("postView").component("postView", {
    
     templateUrl: "app/post-view/post-view.template.html",
     
-    controller: ['$http','$timeout', '$routeParams',
-      function PostViewController($http, $timeout, $routeParams) {
+    controller: ['$scope','$http','$timeout', '$routeParams',
+      function PostViewController($scope, $http, $timeout, $routeParams) {
         
         var self = this;
         this.data = "Loading...";
@@ -23,13 +23,14 @@ angular.module("postView").component("postView", {
             })
             
         }
-
-        $timeout(function() {
-        var code = document.getElementsByTagName("code");
-            for (var i = 0; i < code.length; i++) {
-                self.prism.highlightElement(code[i]);
+        
+        this.renderCallback = function() {
+            var elem = document.getElementsByTagName("code");
+            for (var i = 0; i < elem.length; i++) {
+                self.prism.highlightElement(elem[i]);
             }
-        }, 2000, false);
+        }
+
       }
     ]
     
