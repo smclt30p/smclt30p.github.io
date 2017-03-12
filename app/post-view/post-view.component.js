@@ -2,13 +2,13 @@ angular.module("postView").component("postView", {
    
     templateUrl: "app/post-view/post-view.template.html",
     
-    controller: ['$http', '$routeParams',
-      function PostViewController($http, $routeParams) {
+    controller: ['$http','$timeout', '$routeParams',
+      function PostViewController($http, $timeout, $routeParams) {
         
         var self = this;
-          this.data = "Loading...";
-        
-          this.id = $routeParams.id;
+        this.data = "Loading...";
+        this.id = $routeParams.id;
+        this.prism = Prism;
           
         this.fetchPost = function(id) {
                         
@@ -17,13 +17,19 @@ angular.module("postView").component("postView", {
                 var conv = showdown.Converter();
                 var text = showdown.makeHtml(response.data);
                 self.text = text;
-                
+                                
             }, function errorCallback(response) {
                 self.text = "Error occured. Try again."
             })
             
         }
-        
+
+        $timeout(function() {
+        var code = document.getElementsByTagName("code");
+            for (var i = 0; i < code.length; i++) {
+                self.prism.highlightElement(code[i]);
+            }
+        }, 100, false);
       }
     ]
     
