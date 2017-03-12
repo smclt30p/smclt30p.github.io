@@ -6,55 +6,17 @@
           {
             "id":1,
             "day": 7,
-            "title": "Starting a blog",
-            "url": "http://www.example.com"
+            "title": "Starting a blog"
           },
           {
             "id":2,
             "day": 8,
-            "title": "StackOverflow is lying to you - Converting a stack trace to a string",
-            "url": "http://www.example.com"
+            "title": "StackOverflow is lying to you - Converting a stack trace to a string"
           },
           {
             "id":3,
             "day": 23,
-            "title": "Console Output - printf vs StringBuilder",
-            "url": "http://www.example.com"
-          },
-          {
-            "id":4,
-            "day": 25,
-            "title": "Gentoo Linux - The best distro for fast hardware",
-            "url": "http://www.example.com"
-          }
-        ]
-      },{
-        "name": "July",
-        "year": 2017,
-        "posts": [
-          {
-            "id":5,
-            "day": 5,
-            "title": "Migrating from Windows Phone",
-            "url": "http://www.example.com"
-          },
-          {
-            "id":6,
-            "day": 1,
-            "title": "Fixing Windows Phone hotspot",
-            "url": "http://www.example.com"
-          },
-          {
-            "id":7,
-            "day": 22,
-            "title": "Windows Package Mangaer - Chocolatey",
-            "url": "http://www.example.com"
-          },
-          {
-            "id":8,
-            "day": 30,
-            "title": "Ubuntu Sucks",
-            "url": "http://www.example.com"
+            "title": "Console Output - printf vs StringBuilder"
           }
         ]
       }
