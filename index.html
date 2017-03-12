@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
 <head>
 	<link href="css/master.css" rel="stylesheet" type="text/css">
 	<title>Gala's EOF - Index</title>
@@ -7,32 +7,21 @@
 </head>
 <body>
 <div class="head">
-<h2 style="text-align: center;">Gala's End of File - The blog of a soul on the web</h2>
+<h2 style="text-align: center;">Gala's End of File</h2>
 </div>
 <div class="master">
 
-	<div class="slave" id="contact">
-	<ul>
-		<h3>Contact</h3>
-		<li><a href="mailto://smclt30p@gmail.com">E-mail (smclt30p@gmail.com)</a></li>
-		<li><a href="https://www.facebook.com/smclt30p">Facebook</a></li>		
-		<li><a href="https://github.com/smclt30p">GitHub</a></li>		
-		<li><a href="https://plus.google.com/107234209038978606476">Google+ (obsolete)</a></li>		
-		<li><a href="https://www.twitter.com/smclt30p">Twitter (obsolete)</a></li>		
-	</ul>
-	</div>
-
-	<div class="slave">
-	<ul>
-		<h3>June 2016</h3>
-		<li><a href="posts/2016/06/07-starting-a-blog.html">June 7th - Starting a blog</a></li>		
-		<li><a href="posts/2016/06/08-stackoverflow-is-lying-to-you.html">June 8th - StackOverflow is lying to you - Converting a stack trace to a string</a></li>		
-		<li><a href="posts/2016/06/23-printf-vs-stringbuilder.html">June 23rd - Console Output - printf vs StringBuilder</a></li>		
-		<li><a href="posts/2016/06/25-gentoo.html">June 25th - Gentoo Linux - The best distro for fast hardware</a></li>		
-		
-	</ul>
-	</div>
+    <contact-list></contact-list>
+    <post-list></post-list>
 
 </div>
+    
+    <script src="js/angular.min.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/post-list/post-list.module.js"></script>
+    <script src="app/post-list/post-list.component.js"></script>
+    <script src="app/contact-list/contact-list.module.js"></script>
+    <script src="app/contact-list/contact-list.component.js"></script>
+    
 </body>
 </html>

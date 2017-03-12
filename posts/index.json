@@ -1,0 +1,14 @@
+[
+  {
+    year: 2016,
+    month: 4,
+    title: "Post #1",
+    src: "https://www.example.com"
+  },
+  {
+    year: 2016,
+    month: 5,
+    title: "Post #2",
+    src: "https://www.example.com"
+  }
+]
