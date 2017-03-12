@@ -23,6 +23,7 @@ angular.module("contactList").component("contactList",{
                 href:"https://www.twitter.com/smclt30p"
             }
         
-        ]
-    }
+        ];
+        
+  }
 })

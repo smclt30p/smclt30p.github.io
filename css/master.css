@@ -25,7 +25,14 @@ h2 {
 	margin: 0 auto;
     max-width: 700px;
 }
-.slave {
+.slave input {
+    background: black;
+    border: 1px solid white;
+    font-size: 12px;
+    color: white;
+    width: 50%;
+    transform: translateX(50%);
+    padding: 5px;
 }
 h3 {
     color: white;
@@ -75,4 +82,7 @@ b {
 }
 pre {
     line-height: 1.8;
+}
+.input-wrapper {
+    margin: 0 auto;
 }

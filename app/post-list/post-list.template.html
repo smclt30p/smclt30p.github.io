@@ -1,7 +1,8 @@
-<div class="slave">
+<div class="slave" ng-init="$ctrl.fetchPosts()">
+    <div class="input-wrapper"><input placeholder="Search" ng-model="$ctrl.query"></div>
     <ul ng-repeat="month in $ctrl.data">
         <h3>{{month.name + " " + month.year}}</h3>
-        <li ng-repeat="post in month.posts">
+        <li ng-repeat="post in month.posts | filter:$ctrl.query">
             <a>{{$ctrl.formatOut(post.title, post.day, month.name)}}</a>
         </li>
     </ul>

@@ -2,7 +2,7 @@ angular.module("postList").component("postList",{
     
     templateUrl: "app/post-list/post-list.template.html",
     
-    controller: function PostListController($scope) {
+    controller: function PostListController($http) {
     
     lookupTable = [
         {value:1, suffix:"st"},
@@ -15,38 +15,7 @@ angular.module("postList").component("postList",{
         {value:8, suffix:"th"},
         {value:9, suffix:"th"},
     ]
-    
-    this.data = 
-    
-    [
-      {
-        name: "June",
-        year: 2016,
-        posts: [
-          {
-            day: 7,
-            title: "Starting a blog",
-            url: "http://www.example.com"
-          },
-          {
-            day: 8,
-            title: "StackOverflow is lying to you - Converting a stack trace to a string",
-            url: "http://www.example.com"
-          },
-          {
-            day: 23,
-            title: "Console Output - printf vs StringBuilder",
-            url: "http://www.example.com"
-          },
-          {
-            day: 25,
-            title: "Gentoo Linux - The best distro for fast hardware",
-            url: "http://www.example.com"
-          }
-        ]
-      }
-    ]
-    
+        
     this.formatOut = function(title, day, month) {
         return addSufix(day) + " " + month + " - " + title;
     }
@@ -59,6 +28,14 @@ angular.module("postList").component("postList",{
                 return day + lookupTable[i].suffix;
             }
         }
+    }
+    
+    var self = this;
+    
+    this.fetchPosts = function() {
+        $http.get("posts/index.json").then(function(response) {
+            self.data = response.data;
+        });
     }
     
 }
