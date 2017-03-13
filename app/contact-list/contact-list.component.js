@@ -10,6 +10,9 @@ angular.module("contactList").component("contactList",{
                 title:"E-mail (smclt30p@gmail.com)",
                 href:"mailto://smclt30p@gmail.com"
             },{
+                title:"GPG Key",
+                href:"/gpg.pub.asc"
+            },{
                 title:"Facebook",
                 href:"https://www.facebook.com/smclt30p"
             },{
