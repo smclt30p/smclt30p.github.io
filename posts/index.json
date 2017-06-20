@@ -9,5 +9,15 @@
             "title": "cls - Clearing the blog"
           }
         ]
+      },{
+        "name": "June",
+        "year": 2017,
+        "posts": [
+          {
+            "id":2,
+            "day": 21,
+            "title": "Lenovo Thinkpad X220 buying guide"
+          }
+        ]
       }
-    ]
+]
